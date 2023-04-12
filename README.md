@@ -25,6 +25,6 @@ POST http://localhost:8080/api/v1/envio  (Registrar envio.)
 
 GET http://localhost:8080/api/v1/envio/{{numeroGuia}}  (Obtener un envio por su numero guia.)
 
-PATCH http://localhost:8080/api/v1/envio  (Actualizar el estado de un envio.)
+PATCH http://localhost:8080/api/v1/envio?guia&estado&empleado  (Actualizar el estado de un envio.)
 
-GET http://localhost:8080/api/v1/envio  (Filtrar los envios por su estado de envio.)
+GET http://localhost:8080/api/v1/envio?estado&cedulaEmpleado  (Filtrar los envios por su estado de envio.)
