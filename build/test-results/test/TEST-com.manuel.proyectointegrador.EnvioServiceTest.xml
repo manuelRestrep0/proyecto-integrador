@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.manuel.proyectointegrador.EnvioServiceTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2023-04-12T14:22:41" hostname="MANUEL-PC" time="0.11">
+  <properties/>
+  <testcase name="actualizarEstadoGuiaNoExistente" classname="com.manuel.proyectointegrador.EnvioServiceTest" time="0.087"/>
+  <testcase name="actualizarEstado" classname="com.manuel.proyectointegrador.EnvioServiceTest" time="0.004"/>
+  <testcase name="filtrarEmpleadoNoExiste" classname="com.manuel.proyectointegrador.EnvioServiceTest" time="0.002"/>
+  <testcase name="crearEnvioSinCliente" classname="com.manuel.proyectointegrador.EnvioServiceTest" time="0.001"/>
+  <testcase name="actualizarEmpleadoNoExistente" classname="com.manuel.proyectointegrador.EnvioServiceTest" time="0.001"/>
+  <testcase name="filtrarEnvios" classname="com.manuel.proyectointegrador.EnvioServiceTest" time="0.002"/>
+  <testcase name="buscarEnvio" classname="com.manuel.proyectointegrador.EnvioServiceTest" time="0.001"/>
+  <testcase name="crearEnvioSinUnDato" classname="com.manuel.proyectointegrador.EnvioServiceTest" time="0.001"/>
+  <testcase name="actualizarEstadoEntregado" classname="com.manuel.proyectointegrador.EnvioServiceTest" time="0.001"/>
+  <testcase name="crearEnvio" classname="com.manuel.proyectointegrador.EnvioServiceTest" time="0.002"/>
+  <testcase name="buscarEnvioNoExistente" classname="com.manuel.proyectointegrador.EnvioServiceTest" time="0.001"/>
+  <testcase name="actualizarEmpleadoNoValido" classname="com.manuel.proyectointegrador.EnvioServiceTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
