@@ -1,5 +1,8 @@
 package com.manuel.proyectointegrador.dto;
 
+import io.swagger.annotations.ApiModel;
+
+@ApiModel(value = "Empleado")
 public class EmpleadoDTO {
 
     private Integer cedula;

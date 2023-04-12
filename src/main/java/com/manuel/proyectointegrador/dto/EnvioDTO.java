@@ -1,7 +1,9 @@
 package com.manuel.proyectointegrador.dto;
 
 import com.manuel.proyectointegrador.model.Cliente;
+import io.swagger.annotations.ApiModel;
 
+@ApiModel(value = "Envio")
 public class EnvioDTO {
     private Integer cedulaCliente;
     private String ciudadOrigen;
