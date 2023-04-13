@@ -6,6 +6,8 @@ la información a la base de datos.
 Fuera de esto, tambien se puede obtener la información de los clientes y empleados dada su cedula; Para obtener la información de un envio es necesario su numero guia, 
 tambien esta la posibilidad de filtrar los envios por su estado actual. 
 
+Las tecnologias que se utilizaron fueron: Java, spring boot, spring data, jpa, swagger y h2 para la base de datos.
+
 
 ## Rutas:
 
