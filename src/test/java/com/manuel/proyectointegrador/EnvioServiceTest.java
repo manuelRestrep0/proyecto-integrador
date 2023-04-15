@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -54,8 +55,8 @@ public class EnvioServiceTest {
                 2
         );
         when(clienteRepository.findById(123)).thenReturn(Optional.of(new Cliente()));
-
-        this.envioService.crearEnvio(envioDTO);
+        String respuesta = this.envioService.crearEnvio(envioDTO);
+        assertTrue(respuesta.contains("RECIBIDO"));
     }
     @Test(expected = ApiRequestException.class)
     public void crearEnvioSinUnDato(){
@@ -111,7 +112,16 @@ public class EnvioServiceTest {
                 paquete
             );
         when(envioRepository.findById(any())).thenReturn(Optional.of(envio));
-        this.envioService.buscarEnvio(numGuia);
+        EnvioDTO envioDTO = this.envioService.buscarEnvio(numGuia);
+
+        assertTrue(envioDTO.getCedulaCliente().equals(123));
+        assertTrue(envioDTO.getCiudadOrigen().equals("medellin"));
+        assertTrue(envioDTO.getCiudadDestino().equals("bogota"));
+        assertTrue(envioDTO.getNombreRecibe().equals("juan"));
+        assertTrue(envioDTO.getNumRecibe().equals("333"));
+        assertTrue(envioDTO.getValorDeclaradoPaquete().equals(999.0));
+        assertTrue(envioDTO.getPeso().equals(1));
+
     }
 
     @Test(expected = ApiRequestException.class)
@@ -157,8 +167,9 @@ public class EnvioServiceTest {
         );
         when(envioRepository.findById(any())).thenReturn(Optional.of(envio));
         when(empleadoRepository.findById(any())).thenReturn(Optional.of(empleado));
+        String respuesta = this.envioService.actualizarEstado(numGuia,cedulaEmpleado,estado);
 
-        this.envioService.actualizarEstado(numGuia,cedulaEmpleado,estado);
+        assertTrue(respuesta.contains("EN RUTA"));
 
     }
     @Test(expected = ApiRequestException.class)
@@ -321,7 +332,9 @@ public class EnvioServiceTest {
         when(empleadoRepository.findById(any())).thenReturn(Optional.of(new Empleado()));
         when(envioRepository.findAll()).thenReturn(envios);
 
-        this.envioService.filtrar(estado,cedulaEmpleado);
+        List<EnvioDTO> enviosDTO =  this.envioService.filtrar(estado,cedulaEmpleado);
+
+        assertTrue(!enviosDTO.isEmpty());
     }
     @Test(expected = ApiRequestException.class)
     public void filtrarEmpleadoNoExiste(){

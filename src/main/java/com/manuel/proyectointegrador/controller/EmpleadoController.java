@@ -27,9 +27,9 @@ public class EmpleadoController {
             @ApiResponse(code = 500, message = "Error inespedaro del sistema.")
     })
     @PostMapping("/empleado")
-    public void crearEmpleado(@RequestBody EmpleadoDTO empleado){
+    public EmpleadoDTO crearEmpleado(@RequestBody EmpleadoDTO empleado){
         this.empleadoService.crearEmpleado(empleado);
-
+        return empleado;
     }
     /*@PatchMapping("/empleado")
     public void actualizarEmpleado(@RequestBody EmpleadoDTO empleado){
@@ -42,7 +42,7 @@ public class EmpleadoController {
             @ApiResponse(code = 400, message = "Bad Request. Algo ingresaste mal."),
             @ApiResponse(code = 500, message = "Error inespedaro del sistema.")
     })
-    @DeleteMapping("/empleados/{cedula}")
+    @DeleteMapping("/empleado/{cedula}")
     public String eliminarEmpleado(@PathVariable("cedula") int cedula){
         this.eliminarEmpleado(cedula);
         return "Empleado eliminado";
@@ -55,7 +55,7 @@ public class EmpleadoController {
             @ApiResponse(code = 400, message = "Bad Request. Algo ingresaste mal."),
             @ApiResponse(code = 500, message = "Error inespedaro del sistema.")
     })
-    @GetMapping("/empleados/{cedula}")
+    @GetMapping("/empleado/{cedula}")
     public EmpleadoDTO obtenerEmpleado(@PathVariable("cedula") int cedula){
         return this.empleadoService.getEmpleadoPorCedula(cedula);
     }

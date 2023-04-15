@@ -78,7 +78,6 @@ public class EnvioService {
         }
         throw new ApiRequestException("El numero guia no se encuentra registrado");
     }
-
     public String actualizarEstado(Integer numGuia, Integer cedulaEmpleado, String estado){
         Optional<Empleado> empleado = this.empleadoRepository.findById(cedulaEmpleado);
         if(empleado.isPresent()){
@@ -114,7 +113,6 @@ public class EnvioService {
         }
         throw new ApiRequestException("El empleado con cedula "+cedulaEmpleado+" no existe en nuestra compania");
     }
-
     public List<EnvioDTO> filtrar(String estado, Integer cedulaEmpleado){
         Optional<Empleado> empleado = this.empleadoRepository.findById(cedulaEmpleado);
         if(empleado.isPresent()){
@@ -141,7 +139,25 @@ public class EnvioService {
         }
         throw new ApiRequestException("El empleado con cedula "+cedulaEmpleado+" no existe en nuestra compania");
     }
-
+    public List<EnvioDTO> retornarEnvios(){
+        List<Envio> envios = this.envioRepository.findAll();
+        List<EnvioDTO> enviosDTO = new ArrayList<>();
+        envios.stream()
+                .forEach(envio -> enviosDTO.add(new EnvioDTO(
+                        envio.getCliente().getCedula(),
+                        envio.getCiudadOrigen(),
+                        envio.getCiudadDestino(),
+                        envio.getDireccionDestino(),
+                        envio.getNombreRecibe(),
+                        envio.getNumeroRecibe(),
+                        envio.getPaquete().getValorDeclarado(),
+                        envio.getPaquete().getPeso(),
+                        envio.getValorEnvio(),
+                        envio.getEstadoEnvio(),
+                        envio.getNumeroGuia()
+                )));
+        return enviosDTO;
+    }
     public String asignarTipoPaquete(Integer peso){
         if(peso<2){
             return "LIVIANO";

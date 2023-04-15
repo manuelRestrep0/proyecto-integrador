@@ -7,7 +7,9 @@ import com.manuel.proyectointegrador.service.EmpleadoService;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
+
 
 public class EmpleadoServiceTest {
 
@@ -26,7 +28,7 @@ public class EmpleadoServiceTest {
                 123,
                 "juan manuel",
                 "restrepo",
-                "3024261812",
+                "302",
                 "example@hotmail.com",
                 "carrera10",
                 "Medellin",
@@ -34,8 +36,18 @@ public class EmpleadoServiceTest {
                 "o+",
                 "COORDINADOR"
         );
+        EmpleadoDTO empleado = this.empleadoService.crearEmpleado(empleadoDTO);
 
-        this.empleadoService.crearEmpleado(empleadoDTO);
+        assertTrue(empleado.getCedula().equals(123));
+        assertTrue(empleado.getNombre().equals("juan manuel"));
+        assertTrue(empleado.getApellido().equals("restrepo"));
+        assertTrue(empleado.getCelular().equals("302"));
+        assertTrue(empleado.getCorreo().equals("example@hotmail.com"));
+        assertTrue(empleado.getDireccionResidencial().equals("carrera10"));
+        assertTrue(empleado.getCiudad().equals("Medellin"));
+        assertTrue(empleado.getAntiguedad().equals(12));
+        assertTrue(empleado.getRh().equals("o+"));
+        assertTrue(empleado.getTipoEmpleado().equals("COORDINADOR"));
     }
     @Test(expected = ApiRequestException.class)
     public void crearEmpleadoSinNombre(){

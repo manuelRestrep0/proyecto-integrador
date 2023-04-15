@@ -73,4 +73,9 @@ public class EnvioController {
         return this.envioService.filtrar(estadoEnvio,cedulaEmpleado);
     }
 
+    @GetMapping("/envios")
+    public List<EnvioDTO> envios(){
+        return this.envioService.retornarEnvios();
+    }
+
 }

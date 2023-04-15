@@ -7,6 +7,8 @@ import com.manuel.proyectointegrador.repository.EmpleadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,6 +28,13 @@ public class EmpleadoService {
             throw new ApiRequestException("Se requiere el apellido");
         } else if(empleadoDTO.getCedula()==null){
             throw new ApiRequestException("Se requiere una identificacion valida");
+        }
+        List<Integer> cedulasEmpleados = new ArrayList<>();
+        this.empleadoRepository.findAll()
+                .stream()
+                .forEach(empleado1 -> cedulasEmpleados.add(empleado1.getCedula()));
+        if(cedulasEmpleados.contains(empleadoDTO.getCedula())){
+            throw new ApiRequestException("La cedula "+empleadoDTO.getCedula()+" ya se encuentra registrada");
         }
         Empleado empleado = new Empleado(
                 empleadoDTO.getCedula(),
@@ -60,7 +69,7 @@ public class EmpleadoService {
             );
             return empleadoDTO;
         }
-        throw new ApiRequestException("El empleado no se encuentra en la base de datos");
+        throw new ApiRequestException("La cedula "+cedula+" no se encuentra registrada");
     }
 
     public void eliminarEmpleado(Integer cedula){

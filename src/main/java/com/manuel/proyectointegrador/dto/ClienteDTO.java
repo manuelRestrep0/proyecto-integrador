@@ -5,20 +5,12 @@ import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(value = "Cliente")
 public class ClienteDTO {
-
-    @ApiModelProperty(position = 0)
     private Integer cedula;
-    @ApiModelProperty(position = 1)
     private String nombre;
-    @ApiModelProperty(position = 2)
     private String apellido;
-    @ApiModelProperty(position = 3)
     private String celular;
-    @ApiModelProperty(position = 4)
     private String correo;
-    @ApiModelProperty(position = 5)
     private String direccionResidencial;
-    @ApiModelProperty(position = 6)
     private String ciudad;
 
     public ClienteDTO() {
@@ -88,5 +80,14 @@ public class ClienteDTO {
 
     public void setCiudad(String ciudad) {
         this.ciudad = ciudad;
+    }
+
+    @Override
+    public String toString() {
+        return "{\n" +
+                "Cedula = " + cedula +
+                ", \nNombre = '" + nombre + '\'' +
+                ", \nApellido = '" + apellido + '\'' +
+                "\n}";
     }
 }

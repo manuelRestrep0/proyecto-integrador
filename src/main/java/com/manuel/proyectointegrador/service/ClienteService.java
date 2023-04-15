@@ -7,6 +7,8 @@ import com.manuel.proyectointegrador.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,7 +27,13 @@ public class ClienteService {
         } else if(clienteDTO.getApellido()==null){
             throw new ApiRequestException("Se requiere el apellido");
         } else if(clienteDTO.getCedula()==null){
-            throw new ApiRequestException("Se requiere una identificacion valida");
+            throw new ApiRequestException("La cedula es nula");
+        }
+        List<Integer> cedulasRegistradas = new ArrayList<>();
+        this.clienteRepository.findAll().stream()
+                .forEach(cliente1 -> cedulasRegistradas.add(cliente1.getCedula()));
+        if(cedulasRegistradas.contains(clienteDTO.getCedula())){
+            throw new ApiRequestException("La cedula "+clienteDTO.getCedula()+" ya se encuentra registrada");
         }
         Cliente cliente = new Cliente(
                 clienteDTO.getCedula(),
@@ -53,7 +61,7 @@ public class ClienteService {
                     );
             return clienteDTO;
         }
-        throw new ApiRequestException("Este cliente no se encuentra registrado");
+        throw new ApiRequestException("La cedula "+cedula+" no se encuentra registrada");
     }
 
     public void eliminarCliente(Integer cedula){
