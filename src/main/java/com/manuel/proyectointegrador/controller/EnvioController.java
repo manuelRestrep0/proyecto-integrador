@@ -68,7 +68,7 @@ public class EnvioController {
             @ApiResponse(code = 500, message = "Error inespedaro del sistema.")
     })
     @GetMapping("/envio")
-    public List<EnvioDTO> filtrarEnvios(@RequestParam String estadoEnvio, @RequestParam Integer cedulaEmpleado){
+    public List<EnvioDTO> filtrarEnvios(@RequestParam("estado") String estadoEnvio, @RequestParam("empleado") Integer cedulaEmpleado){
         //tener en cuenta las validaciones.
         return this.envioService.filtrar(estadoEnvio,cedulaEmpleado);
     }
