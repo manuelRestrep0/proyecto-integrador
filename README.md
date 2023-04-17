@@ -249,3 +249,12 @@ Las tecnologias que se utilizaron fueron: Java, spring boot, spring data, jpa, s
 	}
 ]
  ``` 
+ 
+ # Diagrama UML
+ 
+![image](https://user-images.githubusercontent.com/94997816/232358115-2848b7d5-51a6-4c77-9758-6429ad4535c4.png)
+
+# Diagrama Entidad-Relación
+
+![image](https://user-images.githubusercontent.com/94997816/232358215-f7fe1ee5-14bf-4204-9057-92b4ded816f6.png)
+
