@@ -1,7 +1,6 @@
 package com.manuel.proyectointegrador.model;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name = "envios")
@@ -21,7 +20,7 @@ public class Envio {
     @Column(name = "receptor")
     private String nombreRecibe;
     @Column(name = "celular")
-    private String numeroRecibe;
+    private String numRecibe;
     @Column(name = "hora")
     private String horaEntrega;
     @Column(name = "estado")
@@ -41,7 +40,7 @@ public class Envio {
         this.ciudadDestino = ciudadDestino;
         this.direccionDestino = direccionDestino;
         this.nombreRecibe = nombreRecibe;
-        this.numeroRecibe = numeroRecibe;
+        this.numRecibe = numeroRecibe;
         this.horaEntrega = horaEntrega;
         this.estadoEnvio = estadoEnvio;
         this.valorEnvio = valorEnvio;
@@ -96,12 +95,12 @@ public class Envio {
         this.nombreRecibe = nombreRecibe;
     }
 
-    public String getNumeroRecibe() {
-        return numeroRecibe;
+    public String getNumRecibe() {
+        return numRecibe;
     }
 
-    public void setNumeroRecibe(String numeroRecibe) {
-        this.numeroRecibe = numeroRecibe;
+    public void setNumRecibe(String numeroRecibe) {
+        this.numRecibe = numeroRecibe;
     }
 
     public String getHoraEntrega() {

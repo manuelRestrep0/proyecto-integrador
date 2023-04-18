@@ -86,7 +86,7 @@ public class EnvioService {
                     ,envio.get().getCiudadDestino()
                     ,envio.get().getDireccionDestino()
                     ,envio.get().getNombreRecibe()
-                    ,envio.get().getNumeroRecibe()
+                    ,envio.get().getNumRecibe()
                     ,envio.get().getPaquete().getValorDeclarado()
                     ,envio.get().getPaquete().getPeso()
             );
@@ -141,7 +141,7 @@ public class EnvioService {
                             envio.getCiudadDestino(),
                             envio.getDireccionDestino(),
                             envio.getNombreRecibe(),
-                            envio.getNumeroRecibe(),
+                            envio.getNumRecibe(),
                             envio.getPaquete().getValorDeclarado(),
                             envio.getPaquete().getPeso(),
                             envio.getValorEnvio(),
@@ -162,7 +162,7 @@ public class EnvioService {
                         envio.getCiudadDestino(),
                         envio.getDireccionDestino(),
                         envio.getNombreRecibe(),
-                        envio.getNumeroRecibe(),
+                        envio.getNumRecibe(),
                         envio.getPaquete().getValorDeclarado(),
                         envio.getPaquete().getPeso(),
                         envio.getValorEnvio(),
