@@ -1,5 +1,6 @@
 package com.manuel.proyectointegrador.service;
 
+import com.manuel.proyectointegrador.Mapper.EnvioMapper;
 import com.manuel.proyectointegrador.dto.EnvioDTO;
 import com.manuel.proyectointegrador.dto.EnvioResponseDTO;
 import com.manuel.proyectointegrador.exception.ApiRequestException;
@@ -79,22 +80,14 @@ public class EnvioService {
     }
     public EnvioDTO buscarEnvio(Integer guia){
         Optional<Envio> envio = this.envioRepository.findById(guia);
-        if(envio.isPresent()){
-            EnvioDTO envioDTO = new EnvioDTO(
-                    envio.get().getCliente().getCedula()
-                    ,envio.get().getCiudadOrigen()
-                    ,envio.get().getCiudadDestino()
-                    ,envio.get().getDireccionDestino()
-                    ,envio.get().getNombreRecibe()
-                    ,envio.get().getNumRecibe()
-                    ,envio.get().getPaquete().getValorDeclarado()
-                    ,envio.get().getPaquete().getPeso()
-            );
-            envioDTO.setEstadoEnvio(envio.get().getEstadoEnvio());
-            envioDTO.setValorEnvio(envio.get().getValorEnvio());
-            return envioDTO;
+        if(!envio.isPresent()){
+            throw new ApiRequestException("El numero guia "+guia+" no se encuentra registrado");
         }
-        throw new ApiRequestException("El numero guia no se encuentra registrado");
+        EnvioDTO envioDTO = EnvioMapper.INSTANCE.envioToEnvioDTO(envio.get());
+        envioDTO.setCedulaCliente(envio.get().getCliente().getCedula());
+        envioDTO.setValorDeclaradoPaquete(envio.get().getPaquete().getValorDeclarado());
+        envioDTO.setPeso(envio.get().getPaquete().getPeso());
+        return envioDTO;
     }
     public EnvioResponseDTO actualizarEstado(Integer numGuia, Integer cedulaEmpleado, String estado){
         Optional<Empleado> empleado = this.empleadoRepository.findById(cedulaEmpleado);
@@ -128,47 +121,33 @@ public class EnvioService {
     }
     public List<EnvioDTO> filtrar(String estado, Integer cedulaEmpleado){
         Optional<Empleado> empleado = this.empleadoRepository.findById(cedulaEmpleado);
-        if(empleado.isPresent()){
-            List<Envio> envios = this.envioRepository.findAll();
-            envios = envios.stream()
-                    .filter(envio -> envio.getEstadoEnvio().equals(estado))
-                    .collect(Collectors.toList());
-            List<EnvioDTO> enviosDTO = new ArrayList<>();
-            envios.stream()
-                    .forEach(envio -> enviosDTO.add(new EnvioDTO(
-                            envio.getCliente().getCedula(),
-                            envio.getCiudadOrigen(),
-                            envio.getCiudadDestino(),
-                            envio.getDireccionDestino(),
-                            envio.getNombreRecibe(),
-                            envio.getNumRecibe(),
-                            envio.getPaquete().getValorDeclarado(),
-                            envio.getPaquete().getPeso(),
-                            envio.getValorEnvio(),
-                            envio.getEstadoEnvio(),
-                            envio.getNumeroGuia()
-                    )));
-            return enviosDTO;
+        if(!empleado.isPresent()){
+            throw new ApiRequestException("El empleado con cedula "+cedulaEmpleado+" no existe en nuestra compania");
         }
-        throw new ApiRequestException("El empleado con cedula "+cedulaEmpleado+" no existe en nuestra compania");
+        List<Envio> envios = this.envioRepository.findAll();
+        envios = envios.stream()
+                .filter(envio -> envio.getEstadoEnvio().equals(estado))
+                .collect(Collectors.toList());
+        List<EnvioDTO> enviosDTO = new ArrayList<>();
+        for (Envio envio: envios) {
+            EnvioDTO envioDTO = EnvioMapper.INSTANCE.envioToEnvioDTO(envio);
+            envioDTO.setCedulaCliente(envio.getCliente().getCedula());
+            envioDTO.setValorDeclaradoPaquete(envio.getPaquete().getValorDeclarado());
+            envioDTO.setPeso(envio.getPaquete().getPeso());
+            enviosDTO.add(envioDTO);
+        }
+        return enviosDTO;
     }
     public List<EnvioDTO> retornarEnvios(){
         List<Envio> envios = this.envioRepository.findAll();
         List<EnvioDTO> enviosDTO = new ArrayList<>();
-        envios.stream()
-                .forEach(envio -> enviosDTO.add(new EnvioDTO(
-                        envio.getCliente().getCedula(),
-                        envio.getCiudadOrigen(),
-                        envio.getCiudadDestino(),
-                        envio.getDireccionDestino(),
-                        envio.getNombreRecibe(),
-                        envio.getNumRecibe(),
-                        envio.getPaquete().getValorDeclarado(),
-                        envio.getPaquete().getPeso(),
-                        envio.getValorEnvio(),
-                        envio.getEstadoEnvio(),
-                        envio.getNumeroGuia()
-                )));
+        for (Envio envio: envios) {
+            EnvioDTO envioDTO = EnvioMapper.INSTANCE.envioToEnvioDTO(envio);
+            envioDTO.setCedulaCliente(envio.getCliente().getCedula());
+            envioDTO.setValorDeclaradoPaquete(envio.getPaquete().getValorDeclarado());
+            envioDTO.setPeso(envio.getPaquete().getPeso());
+            enviosDTO.add(envioDTO);
+        }
         return enviosDTO;
     }
     public String asignarTipoPaquete(Integer peso){

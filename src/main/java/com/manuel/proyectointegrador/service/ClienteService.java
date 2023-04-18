@@ -1,5 +1,6 @@
 package com.manuel.proyectointegrador.service;
 
+import com.manuel.proyectointegrador.Mapper.ClienteMapper;
 import com.manuel.proyectointegrador.dto.ClienteDTO;
 import com.manuel.proyectointegrador.exception.ApiRequestException;
 import com.manuel.proyectointegrador.model.Cliente;
@@ -35,33 +36,19 @@ public class ClienteService {
         if(cedulasRegistradas.contains(clienteDTO.getCedula())){
             throw new ApiRequestException("La cedula "+clienteDTO.getCedula()+" ya se encuentra registrada");
         }
-        Cliente cliente = new Cliente(
-                clienteDTO.getCedula(),
-                clienteDTO.getNombre(),
-                clienteDTO.getApellido(),
-                clienteDTO.getCelular(),
-                clienteDTO.getCorreo(),
-                clienteDTO.getDireccionResidencial(),
-                clienteDTO.getCiudad());
+
+        Cliente cliente = ClienteMapper.INSTANCE.clienteDTOtoCliente(clienteDTO);
         this.clienteRepository.save(cliente);
         return clienteDTO;
     }
 
     public ClienteDTO obtenerCliente(Integer cedula){
         Optional<Cliente> cliente = this.clienteRepository.findById(cedula);
-        if(cliente.isPresent()){
-            ClienteDTO clienteDTO = new ClienteDTO(
-                    cliente.get().getCedula(),
-                    cliente.get().getNombre(),
-                    cliente.get().getApellido(),
-                    cliente.get().getCelular(),
-                    cliente.get().getCorreoElectronico(),
-                    cliente.get().getDireccionResidencial(),
-                    cliente.get().getCiudad()
-                    );
-            return clienteDTO;
+        if(!cliente.isPresent()){
+            throw new ApiRequestException("La cedula "+cedula+" no se encuentra registrada");
         }
-        throw new ApiRequestException("La cedula "+cedula+" no se encuentra registrada");
+        ClienteDTO clienteDTO = ClienteMapper.INSTANCE.clienteToClienteDTO(cliente.get());
+        return clienteDTO;
     }
 
     public void eliminarCliente(Integer cedula){

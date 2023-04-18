@@ -1,5 +1,6 @@
 package com.manuel.proyectointegrador.service;
 
+import com.manuel.proyectointegrador.Mapper.EmpleadoMapper;
 import com.manuel.proyectointegrador.dto.EmpleadoDTO;
 import com.manuel.proyectointegrador.exception.ApiRequestException;
 import com.manuel.proyectointegrador.model.Empleado;
@@ -36,40 +37,20 @@ public class EmpleadoService {
         if(cedulasEmpleados.contains(empleadoDTO.getCedula())){
             throw new ApiRequestException("La cedula "+empleadoDTO.getCedula()+" ya se encuentra registrada");
         }
-        Empleado empleado = new Empleado(
-                empleadoDTO.getCedula(),
-                empleadoDTO.getNombre(),
-                empleadoDTO.getApellido(),
-                empleadoDTO.getCelular(),
-                empleadoDTO.getCorreo(),
-                empleadoDTO.getDireccionResidencial(),
-                empleadoDTO.getCiudad(),
-                empleadoDTO.getAntiguedad(),
-                empleadoDTO.getRh(),
-                empleadoDTO.getTipoEmpleado()
-        );
+
+        Empleado empleado = EmpleadoMapper.INSTANCE.empleadoDTOtoEmpleado(empleadoDTO);
+        empleado.setAntiguedad(empleadoDTO.getAntiguedad());
         this.empleadoRepository.save(empleado);
         return empleadoDTO;
     }
 
     public EmpleadoDTO getEmpleadoPorCedula(Integer cedula){
         Optional<Empleado> empleado = this.empleadoRepository.findById(cedula);
-        if(empleado.isPresent()){
-            EmpleadoDTO empleadoDTO = new EmpleadoDTO(
-                    empleado.get().getCedula(),
-                    empleado.get().getNombre(),
-                    empleado.get().getApellido(),
-                    empleado.get().getCelular(),
-                    empleado.get().getCorreoElectronico(),
-                    empleado.get().getDireccionResidencial(),
-                    empleado.get().getCiudad(),
-                    empleado.get().getAntiguedad(),
-                    empleado.get().getRh(),
-                    empleado.get().getTipoEmpleado()
-            );
-            return empleadoDTO;
+        if(!empleado.isPresent()){
+            throw new ApiRequestException("La cedula "+cedula+" no se encuentra registrada");
         }
-        throw new ApiRequestException("La cedula "+cedula+" no se encuentra registrada");
+        EmpleadoDTO empleadoDTO = EmpleadoMapper.INSTANCE.empleadoToEmpleadoDTO(empleado.get());
+        return empleadoDTO;
     }
 
     public void eliminarEmpleado(Integer cedula){

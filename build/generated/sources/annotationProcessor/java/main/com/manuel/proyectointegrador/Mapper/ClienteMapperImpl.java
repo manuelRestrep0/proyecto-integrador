@@ -6,7 +6,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-04-18T17:21:16-0500",
+    date = "2023-04-18T18:03:05-0500",
     comments = "version: 1.4.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.6.1.jar, environment: Java 17.0.6 (Oracle Corporation)"
 )
 public class ClienteMapperImpl implements ClienteMapper {
@@ -23,6 +23,7 @@ public class ClienteMapperImpl implements ClienteMapper {
         clienteDTO.setNombre( cliente.getNombre() );
         clienteDTO.setApellido( cliente.getApellido() );
         clienteDTO.setCelular( cliente.getCelular() );
+        clienteDTO.setCorreo( cliente.getCorreo() );
         clienteDTO.setDireccionResidencial( cliente.getDireccionResidencial() );
         clienteDTO.setCiudad( cliente.getCiudad() );
 
@@ -41,6 +42,7 @@ public class ClienteMapperImpl implements ClienteMapper {
         cliente.setNombre( clienteDTO.getNombre() );
         cliente.setApellido( clienteDTO.getApellido() );
         cliente.setCelular( clienteDTO.getCelular() );
+        cliente.setCorreo( clienteDTO.getCorreo() );
         cliente.setDireccionResidencial( clienteDTO.getDireccionResidencial() );
         cliente.setCiudad( clienteDTO.getCiudad() );
 

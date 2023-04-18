@@ -18,7 +18,7 @@ public class Cliente {
     @Column(name = "celular")
     private String celular;
     @Column(name = "correo")
-    private String correoElectronico;
+    private String correo;
     @Column(name = "direccion")
     private String direccionResidencial;
     @Column(name = "ciudad")
@@ -27,12 +27,12 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(Integer cedula, String nombre, String apellido, String celular, String correoElectronico, String direccionResidencial, String ciudad) {
+    public Cliente(Integer cedula, String nombre, String apellido, String celular, String correo, String direccionResidencial, String ciudad) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.apellido = apellido;
         this.celular = celular;
-        this.correoElectronico = correoElectronico;
+        this.correo = correo;
         this.direccionResidencial = direccionResidencial;
         this.ciudad = ciudad;
     }
@@ -69,12 +69,12 @@ public class Cliente {
         this.celular = celular;
     }
 
-    public String getCorreoElectronico() {
-        return correoElectronico;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setCorreoElectronico(String correoElectronico) {
-        this.correoElectronico = correoElectronico;
+    public void setCorreo(String correoElectronico) {
+        this.correo = correoElectronico;
     }
 
     public String getDireccionResidencial() {

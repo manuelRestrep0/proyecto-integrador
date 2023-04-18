@@ -17,7 +17,7 @@ public class Empleado {
     @Column(name = "celular")
     private String celular;
     @Column(name = "correo")
-    private String correoElectronico;
+    private String correo;
     @Column(name = "direccion")
     private String direccionResidencial;
     @Column(name = "ciudad")
@@ -32,12 +32,12 @@ public class Empleado {
     public Empleado() {
     }
 
-    public Empleado(int cedula, String nombre, String apellido, String celular, String correoElectronico, String direccionResidencial, String ciudad, Integer antiguedad, String rh, String tipoEmpleado) {
+    public Empleado(int cedula, String nombre, String apellido, String celular, String correo, String direccionResidencial, String ciudad, Integer antiguedad, String rh, String tipoEmpleado) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.apellido = apellido;
         this.celular = celular;
-        this.correoElectronico = correoElectronico;
+        this.correo = correo;
         this.direccionResidencial = direccionResidencial;
         this.ciudad = ciudad;
         this.antiguedad = antiguedad;
@@ -77,12 +77,12 @@ public class Empleado {
         this.celular = celular;
     }
 
-    public String getCorreoElectronico() {
-        return correoElectronico;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setCorreoElectronico(String correoElectronico) {
-        this.correoElectronico = correoElectronico;
+    public void setCorreo(String correoElectronico) {
+        this.correo = correoElectronico;
     }
 
     public String getDireccionResidencial() {
@@ -106,7 +106,7 @@ public class Empleado {
     }
 
     public void setAntiguedad(Integer antiguedad) {
-        antiguedad = antiguedad;
+        this.antiguedad = antiguedad;
     }
 
     public String getRh() {

@@ -6,7 +6,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-04-18T17:21:16-0500",
+    date = "2023-04-18T18:23:42-0500",
     comments = "version: 1.4.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.6.1.jar, environment: Java 17.0.6 (Oracle Corporation)"
 )
 public class EmpleadoMapperImpl implements EmpleadoMapper {
@@ -23,6 +23,7 @@ public class EmpleadoMapperImpl implements EmpleadoMapper {
         empleadoDTO.setNombre( empleado.getNombre() );
         empleadoDTO.setApellido( empleado.getApellido() );
         empleadoDTO.setCelular( empleado.getCelular() );
+        empleadoDTO.setCorreo( empleado.getCorreo() );
         empleadoDTO.setDireccionResidencial( empleado.getDireccionResidencial() );
         empleadoDTO.setCiudad( empleado.getCiudad() );
         empleadoDTO.setAntiguedad( empleado.getAntiguedad() );
@@ -46,6 +47,7 @@ public class EmpleadoMapperImpl implements EmpleadoMapper {
         empleado.setNombre( empleadoDTO.getNombre() );
         empleado.setApellido( empleadoDTO.getApellido() );
         empleado.setCelular( empleadoDTO.getCelular() );
+        empleado.setCorreo( empleadoDTO.getCorreo() );
         empleado.setDireccionResidencial( empleadoDTO.getDireccionResidencial() );
         empleado.setCiudad( empleadoDTO.getCiudad() );
         empleado.setAntiguedad( empleadoDTO.getAntiguedad() );
