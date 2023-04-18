@@ -1,6 +1,7 @@
 package com.manuel.proyectointegrador;
 
 import com.manuel.proyectointegrador.dto.EnvioDTO;
+import com.manuel.proyectointegrador.dto.EnvioResponseDTO;
 import com.manuel.proyectointegrador.exception.ApiRequestException;
 import com.manuel.proyectointegrador.model.Cliente;
 import com.manuel.proyectointegrador.model.Empleado;
@@ -55,8 +56,8 @@ public class EnvioServiceTest {
                 2
         );
         when(clienteRepository.findById(123)).thenReturn(Optional.of(new Cliente()));
-        String respuesta = this.envioService.crearEnvio(envioDTO);
-        assertTrue(respuesta.contains("RECIBIDO"));
+        EnvioResponseDTO respuesta = this.envioService.crearEnvio(envioDTO);
+        assertTrue(respuesta.getEstadoEnvio().equals("RECIBIDO"));
     }
     @Test(expected = ApiRequestException.class)
     public void crearEnvioSinUnDato(){
@@ -167,9 +168,9 @@ public class EnvioServiceTest {
         );
         when(envioRepository.findById(any())).thenReturn(Optional.of(envio));
         when(empleadoRepository.findById(any())).thenReturn(Optional.of(empleado));
-        String respuesta = this.envioService.actualizarEstado(numGuia,cedulaEmpleado,estado);
+        EnvioResponseDTO respuesta = this.envioService.actualizarEstado(numGuia,cedulaEmpleado,estado);
 
-        assertTrue(respuesta.contains("EN RUTA"));
+        assertTrue(respuesta.getEstadoEnvio().equals("EN RUTA"));
 
     }
     @Test(expected = ApiRequestException.class)

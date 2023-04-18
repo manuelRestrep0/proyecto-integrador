@@ -1,6 +1,7 @@
 package com.manuel.proyectointegrador.controller;
 
 import com.manuel.proyectointegrador.dto.EnvioDTO;
+import com.manuel.proyectointegrador.dto.EnvioResponseDTO;
 import com.manuel.proyectointegrador.model.Envio;
 import com.manuel.proyectointegrador.service.EnvioService;
 import io.swagger.annotations.Api;
@@ -31,7 +32,7 @@ public class EnvioController {
             @ApiResponse(code = 500, message = "Error inespedaro del sistema.")
     })
     @PostMapping("/envio")
-    public String crearEnvio(@RequestBody EnvioDTO envio){
+    public EnvioResponseDTO crearEnvio(@RequestBody EnvioDTO envio){
         return this.envioService.crearEnvio(envio);
     }
 
@@ -56,7 +57,7 @@ public class EnvioController {
             @ApiResponse(code = 500, message = "Error inespedaro del sistema.")
     })
     @PatchMapping("/envio")
-    public String actualizarEstadoEnvio(@RequestParam("guia") Integer numGuia, @RequestParam("estado") String estadoEnvio, @RequestParam("empleado") Integer cedulaEmpleado){
+    public EnvioResponseDTO actualizarEstadoEnvio(@RequestParam("guia") Integer numGuia, @RequestParam("estado") String estadoEnvio, @RequestParam("empleado") Integer cedulaEmpleado){
         return this.envioService.actualizarEstado(numGuia,cedulaEmpleado,estadoEnvio);
     }
 
