@@ -1,10 +1,10 @@
 # PROYECTO INTEGRADOR MAKAIA 
 
-En este proyecto se hizo uso de todo lo aprendido durante el bootcamp para realizar un sistema de envios que permite automatizar la gestión de envios.
-La aplicación tiene como funcionalidades el registro de clientes, de empleados y de envios. Cada registro tiene diferentes validaciones necesarias para añadir 
-la información a la base de datos.
-Fuera de esto, tambien se puede obtener la información de los clientes y empleados dada su cedula; Para obtener la información de un envio es necesario su numero guia, 
-tambien esta la posibilidad de filtrar los envios por su estado actual. 
+El proyecto tiene la finalidad de demostrar que se logró aprender exitosamente todos los contenidos del bootcamp de backend de Makaia, por ello se hizo uso de todas las tecnologías aprendidas a lo largo del curso.
+
+Este servicio ayuda a una empresa de mensajeria a gestionar a sus clientes, empleados y envios; Permitiendo hacer registros, consultar datos y eliminar datos de una base de datos donde tienen toda la información
+del negocio.
+
 
 El proyecto esta hecho principalmente con las siguientes tecnologías: 
 
