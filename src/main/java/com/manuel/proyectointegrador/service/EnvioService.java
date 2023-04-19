@@ -65,17 +65,18 @@ public class EnvioService {
         if(!cliente.isPresent()){
             throw new ApiRequestException("El cliente con cedula "+envioDTO.getCedulaCliente()+" debe de estar registrado para poder enviar el paquete.");
         }
-        List<String> estados = Arrays.asList("RECIBIDO","EN RUTA","ENTREGADO");
-        if(!estados.contains(envioDTO.getEstadoEnvio())){
-            throw new ApiRequestException("El estado de envio: "+envioDTO.getEstadoEnvio()+" no es un estado valido");
-        }
         Paquete paquete = new Paquete(asignarTipoPaquete(envioDTO.getPeso()),envioDTO.getPeso(),envioDTO.getValorDeclaradoPaquete());
         this.paqueteRepository.save(paquete);
-        Envio envio = new Envio(
+        Envio envio = EnvioMapper.INSTANCE.envioDTOtoEnvio(envioDTO);
+        envio.setEstadoEnvio("RECIBIDO");
+        envio.setHoraEntrega(asignarHora());
+        envio.setValorEnvio(asignarPrecioEnvio(paquete.getTipoPaquete()));
+        envio.setPaquete(paquete);
+        /*Envio envio = new Envio(
                 cliente.get(),envioDTO.getCiudadOrigen(),envioDTO.getCiudadDestino(),envioDTO.getDireccionDestino(),
                 envioDTO.getNombreRecibe(),envioDTO.getNumRecibe(),asignarHora(),"RECIBIDO",asignarPrecioEnvio(paquete.getTipoPaquete())
                 ,paquete
-        );
+        );*/
         this.envioRepository.save(envio);
         return new EnvioResponseDTO(envio.getNumeroGuia(),envio.getEstadoEnvio());
     }

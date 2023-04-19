@@ -56,7 +56,9 @@ public class EnvioServiceTest {
                 2
         );
         when(clienteRepository.findById(123)).thenReturn(Optional.of(new Cliente()));
+
         EnvioResponseDTO respuesta = this.envioService.crearEnvio(envioDTO);
+
         assertTrue(respuesta.getEstadoEnvio().equals("RECIBIDO"));
     }
     @Test(expected = ApiRequestException.class)
