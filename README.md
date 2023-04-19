@@ -6,7 +6,27 @@ la información a la base de datos.
 Fuera de esto, tambien se puede obtener la información de los clientes y empleados dada su cedula; Para obtener la información de un envio es necesario su numero guia, 
 tambien esta la posibilidad de filtrar los envios por su estado actual. 
 
-Las tecnologias que se utilizaron fueron: Java, spring boot, spring data, jpa, swagger y h2 para la base de datos.
+El proyecto esta hecho principalmente con las siguientes tecnologías: 
+
+[![My Skills](https://skills.thijs.gg/icons?i=java,mysql,git)](https://skills.thijs.gg)
+
+Ademas se hizo uso de Spring boot para utilizar diferentes librerias tales como:
+
+<ol>
+	<li>Rest-api</li>
+	<li>Swagger</li>
+	<li>Spring data</li>
+	<li>Spring security</li>
+	<li>JUnit</li>
+	<li>Github Desktop</li>
+</ol>
+
+
+La integración continua se implementó con Github Actions y el despliegue del servicio se hizo por medio de Railway,
+se encuentra en el siguiente dominio: 
+
+### https://proyecto-integrador-production-e6df.up.railway.app/swagger-ui/index.html#/
+
 
 
 # Endpoints:
