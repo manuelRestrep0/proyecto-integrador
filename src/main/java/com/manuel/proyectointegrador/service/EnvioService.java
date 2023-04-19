@@ -17,10 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -68,6 +65,10 @@ public class EnvioService {
         if(!cliente.isPresent()){
             throw new ApiRequestException("El cliente con cedula "+envioDTO.getCedulaCliente()+" debe de estar registrado para poder enviar el paquete.");
         }
+        List<String> estados = Arrays.asList("RECIBIDO","EN RUTA","ENTREGADO");
+        if(!estados.contains(envioDTO.getEstadoEnvio())){
+            throw new ApiRequestException("El estado de envio: "+envioDTO.getEstadoEnvio()+" no es un estado valido");
+        }
         Paquete paquete = new Paquete(asignarTipoPaquete(envioDTO.getPeso()),envioDTO.getPeso(),envioDTO.getValorDeclaradoPaquete());
         this.paqueteRepository.save(paquete);
         Envio envio = new Envio(
@@ -98,6 +99,10 @@ public class EnvioService {
         if(!tipo.equals("REPARTIDOR") && !tipo.equals("COORDINADOR")){
             throw new ApiRequestException("Este empleado con cedula: "+cedulaEmpleado+" no puede realizar el cambio solicitado");
         }
+        List<String> estados = Arrays.asList("RECIBIDO","EN RUTA","ENTREGADO");
+        if(!estados.contains(estado)){
+            throw new ApiRequestException("El estado de envio: "+estado+" no es un estado valido");
+        }
         Optional<Envio> envio = this.envioRepository.findById(numGuia);
         if(!envio.isPresent()){
             throw new ApiRequestException("El numero guia "+numGuia+" no se encuentra registrado");
@@ -123,6 +128,10 @@ public class EnvioService {
         Optional<Empleado> empleado = this.empleadoRepository.findById(cedulaEmpleado);
         if(!empleado.isPresent()){
             throw new ApiRequestException("El empleado con cedula "+cedulaEmpleado+" no existe en nuestra compania");
+        }
+        List<String> estados = Arrays.asList("RECIBIDO","EN RUTA","ENTREGADO");
+        if(!estados.contains(estado)){
+            throw new ApiRequestException("El estado de envio: "+estado+" no es un estado valido");
         }
         List<Envio> envios = this.envioRepository.findAll();
         envios = envios.stream()
