@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class EnvioController {
         this.envioService = envioService;
     }
 
+    @PreAuthorize("hasRole('WRITE')")
     @ApiOperation(value = "Generar envio", notes = "Se recibe por el body un un objeto de tipo envioDTO y" +
             "se registra en la base de datos si cumple todas las validaciones.")
     @ApiResponses(value = {
@@ -36,6 +38,7 @@ public class EnvioController {
         return this.envioService.crearEnvio(envio);
     }
 
+    @PreAuthorize("hasRole('READ')")
     @ApiOperation(value = "Obtener envio", notes = "Se recibe por la url el numero guia del envio y " +
             "se devuelve la informacion del envio de estar registrado.")
     @ApiResponses(value = {
@@ -48,6 +51,7 @@ public class EnvioController {
         return this.envioService.buscarEnvio(numeroGuia);
     }
 
+    @PreAuthorize("hasRole('WRITE')")
     @ApiOperation(value = "Actualizar estado de envio", notes = "Se recibe por la url el numero guia del envio," +
             "el estado al que se quiere actualizar el envio y la cedula del empleado para determinar si " +
             "tiene los permisos para realizar la operacion.")
@@ -61,6 +65,7 @@ public class EnvioController {
         return this.envioService.actualizarEstado(numGuia,cedulaEmpleado,estadoEnvio);
     }
 
+    @PreAuthorize("hasRole('READ')")
     @ApiOperation(value = "Obtener lista de envios por estado de envio", notes = "Se recibe por la url el estado de envio " +
             "que se quiere filtrar y la cedula del empleado para saber si esta registrado en la base de datos.")
     @ApiResponses(value = {
@@ -74,6 +79,7 @@ public class EnvioController {
         return this.envioService.filtrar(estadoEnvio,cedulaEmpleado);
     }
 
+    @PreAuthorize("hasRole('READ')")
     @GetMapping("/envios")
     public List<EnvioDTO> envios(){
         return this.envioService.retornarEnvios();

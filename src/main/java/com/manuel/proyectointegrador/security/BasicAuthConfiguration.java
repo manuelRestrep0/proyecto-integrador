@@ -4,10 +4,10 @@ package com.manuel.proyectointegrador.security;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
@@ -15,41 +15,30 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class BasicAuthConfiguration {
-
-    @Value("${usuario}")
-    private String username;
-
-    @Value("${password}")
-    private String password;
-
     @Bean
-    public InMemoryUserDetailsManager userDetailsManager(){
-        UserDetails user = User
-                .withUsername(username)
-                .password(passwordEncoder().encode(password))
-                .roles("ADMIN")
-                .build();
-        return new InMemoryUserDetailsManager(user);
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http
+                .httpBasic()
+                .and().authorizeHttpRequests()
+                .antMatchers(HttpMethod.GET).hasAuthority("read")
+                .antMatchers(HttpMethod.POST).hasAuthority("write")
+                .antMatchers(HttpMethod.PATCH).hasAuthority("write")
+                .antMatchers(HttpMethod.DELETE).hasAuthority("write")
+                .and().csrf().disable().build();
     }
-
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.csrf().disable()
-                .authorizeHttpRequests(authorize -> authorize
-                        .anyRequest().hasRole("ADMIN")
-                )
-                .httpBasic(Customizer.withDefaults());
-
-
-        /*httpSecurity.authorizeRequests()
-                .antMatchers("/api/v1/disponibles").permitAll()
-                .anyRequest()
-                .authenticated()
-                .and()
-                .httpBasic();*/
-        return httpSecurity.build();
+    public UserDetailsService userDetailsService(){
+        return new InMemoryUserDetailsManager(
+                User.withUsername("user")
+                        .password(passwordEncoder().encode("password"))
+                        .authorities("read")
+                        .build(),
+                User.withUsername("admin")
+                        .password(passwordEncoder().encode("admin123"))
+                        .authorities("read","write")
+                        .build()
+        );
     }
-
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder(8);

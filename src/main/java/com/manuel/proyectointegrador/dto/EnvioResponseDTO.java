@@ -1,5 +1,8 @@
 package com.manuel.proyectointegrador.dto;
 
+import io.swagger.annotations.ApiModel;
+
+@ApiModel(value = "EnvioResponse")
 public class EnvioResponseDTO {
 
     private Integer numeroGuia;
