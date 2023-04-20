@@ -15,7 +15,7 @@ import java.util.Optional;
 @Service
 public class ClienteService {
 
-    private ClienteRepository clienteRepository;
+    private final ClienteRepository clienteRepository;
 
     @Autowired
     public ClienteService(ClienteRepository clienteRepository) {
@@ -47,8 +47,7 @@ public class ClienteService {
         if(!cliente.isPresent()){
             throw new ApiRequestException("La cedula "+cedula+" no se encuentra registrada");
         }
-        ClienteDTO clienteDTO = ClienteMapper.INSTANCE.clienteToClienteDTO(cliente.get());
-        return clienteDTO;
+        return ClienteMapper.INSTANCE.clienteToClienteDTO(cliente.get());
     }
 
     public void eliminarCliente(Integer cedula){

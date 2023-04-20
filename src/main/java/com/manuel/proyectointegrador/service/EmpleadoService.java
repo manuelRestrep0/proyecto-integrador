@@ -15,7 +15,7 @@ import java.util.Optional;
 @Service
 public class EmpleadoService {
 
-    private EmpleadoRepository empleadoRepository;
+    private final EmpleadoRepository empleadoRepository;
 
     @Autowired
     public EmpleadoService(EmpleadoRepository empleadoRepository) {
@@ -49,8 +49,7 @@ public class EmpleadoService {
         if(!empleado.isPresent()){
             throw new ApiRequestException("La cedula "+cedula+" no se encuentra registrada");
         }
-        EmpleadoDTO empleadoDTO = EmpleadoMapper.INSTANCE.empleadoToEmpleadoDTO(empleado.get());
-        return empleadoDTO;
+        return EmpleadoMapper.INSTANCE.empleadoToEmpleadoDTO(empleado.get());
     }
 
     public void eliminarEmpleado(Integer cedula){

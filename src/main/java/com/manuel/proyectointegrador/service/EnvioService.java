@@ -23,10 +23,10 @@ import java.util.stream.Collectors;
 @Service
 public class EnvioService {
 
-    private EnvioRepository envioRepository;
-    private ClienteRepository clienteRepository;
-    private EmpleadoRepository empleadoRepository;
-    private PaqueteRepository paqueteRepository;
+    private final EnvioRepository envioRepository;
+    private final ClienteRepository clienteRepository;
+    private final EmpleadoRepository empleadoRepository;
+    private final PaqueteRepository paqueteRepository;
 
     @Autowired
     public EnvioService(EnvioRepository envioRepository, ClienteRepository clienteRepository, EmpleadoRepository empleadoRepository, PaqueteRepository paqueteRepository) {
@@ -72,11 +72,6 @@ public class EnvioService {
         envio.setHoraEntrega(asignarHora());
         envio.setValorEnvio(asignarPrecioEnvio(paquete.getTipoPaquete()));
         envio.setPaquete(paquete);
-        /*Envio envio = new Envio(
-                cliente.get(),envioDTO.getCiudadOrigen(),envioDTO.getCiudadDestino(),envioDTO.getDireccionDestino(),
-                envioDTO.getNombreRecibe(),envioDTO.getNumRecibe(),asignarHora(),"RECIBIDO",asignarPrecioEnvio(paquete.getTipoPaquete())
-                ,paquete
-        );*/
         this.envioRepository.save(envio);
         return new EnvioResponseDTO(envio.getNumeroGuia(),envio.getEstadoEnvio());
     }

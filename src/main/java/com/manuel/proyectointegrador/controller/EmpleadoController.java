@@ -2,7 +2,6 @@ package com.manuel.proyectointegrador.controller;
 
 import com.manuel.proyectointegrador.dto.EmpleadoDTO;
 import com.manuel.proyectointegrador.service.EmpleadoService;
-import com.manuel.proyectointegrador.model.Empleado;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
