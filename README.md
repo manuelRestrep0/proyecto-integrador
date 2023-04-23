@@ -210,7 +210,7 @@ se encuentra en el siguiente dominio:
  ``` 
 
 
-### PATCH http://localhost:8080/api/v1/envio?guia&estado&empleado  (Actualizar el estado de un envio.)
+### PATCH http://localhost:8080/api/v1/envio  (Actualizar el estado de un envio.)
 
   Recibe el numero guia, el estado al que se quiere actualizar el envio y la cedula del empleado 
   para hacer las validaciones y proceder con la actualización del envio.
@@ -222,22 +222,36 @@ se encuentra en el siguiente dominio:
   
   
   Ejemplo de la petición:
-  https://proyecto-integrador-production-e6df.up.railway.app/api/v1/envio?guia=4&estado=EN RUTA&empleado=9009
+  ```java {.highlight -highlight-source-java .bg-black}
+  {
+	"numGuia":"2",
+	"estadoEnvio":"ENTREGADO",
+	"cedulaEmpleado":444
+}	
+  ```
   
   Y la respuesta: 
   
   ```java {.highlight .highlight-source-java .bg-black}
       {
-       numeroGuia=4
+       numeroGuia=2
        ultimoEstado='EN RUTA'
       }
  ``` 
 
-### GET http://localhost:8080/api/v1/envio?estado&cedulaEmpleado  (Filtrar los envios por su estado de envio.)
+### GET http://localhost:8080/api/v1/envio  (Filtrar los envios por su estado de envio.)
 
   Recibe el estado de envio en el que se quiere filtrar los envios de la base de datos y la cedula del empleado.
   
   Si la cedula no se encuentra en la base de datos de empleados, no se realiza la operación.
+  
+  Ejemplo de la petición:
+  ```java {.highlight -highlight-source-java .bg-black}
+  {
+	"estadoEnvio":"EN RUTA",
+	"cedulaEmpleado":444
+}	
+  ```
   
   Ejemplo de respuesta:
   
