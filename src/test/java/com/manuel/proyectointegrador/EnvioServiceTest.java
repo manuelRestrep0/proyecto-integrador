@@ -1,7 +1,9 @@
 package com.manuel.proyectointegrador;
 
 import com.manuel.proyectointegrador.dto.EnvioDTO;
+import com.manuel.proyectointegrador.dto.EnvioFilterDTO;
 import com.manuel.proyectointegrador.dto.EnvioResponseDTO;
+import com.manuel.proyectointegrador.dto.EnvioUpdateDTO;
 import com.manuel.proyectointegrador.exception.ApiRequestException;
 import com.manuel.proyectointegrador.model.Cliente;
 import com.manuel.proyectointegrador.model.Empleado;
@@ -139,6 +141,7 @@ public class EnvioServiceTest {
         Integer numGuia = 1;
         Integer cedulaEmpleado = 123;
         String estado = "EN RUTA";
+        EnvioUpdateDTO envioUpdateDTO = new EnvioUpdateDTO(numGuia,estado,cedulaEmpleado);
         Cliente cliente = new Cliente();
         cliente.setCedula(123);
         Paquete paquete = new Paquete();
@@ -170,7 +173,7 @@ public class EnvioServiceTest {
         );
         when(envioRepository.findById(any())).thenReturn(Optional.of(envio));
         when(empleadoRepository.findById(any())).thenReturn(Optional.of(empleado));
-        EnvioResponseDTO respuesta = this.envioService.actualizarEstado(numGuia,cedulaEmpleado,estado);
+        EnvioResponseDTO respuesta = this.envioService.actualizarEstado(envioUpdateDTO);
 
         assertTrue(respuesta.getEstadoEnvio().equals("EN RUTA"));
 
@@ -180,6 +183,7 @@ public class EnvioServiceTest {
         Integer numGuia = 1;
         Integer cedulaEmpleado = 123;
         String estado = "EN RUTA";
+        EnvioUpdateDTO envioUpdateDTO = new EnvioUpdateDTO(numGuia,estado,cedulaEmpleado);
         Cliente cliente = new Cliente();
         cliente.setCedula(123);
         Paquete paquete = new Paquete();
@@ -212,13 +216,14 @@ public class EnvioServiceTest {
         when(envioRepository.findById(any())).thenReturn(Optional.of(envio));
         when(empleadoRepository.findById(any())).thenReturn(Optional.of(empleado));
 
-        this.envioService.actualizarEstado(numGuia,cedulaEmpleado,estado);
+        this.envioService.actualizarEstado(envioUpdateDTO);
     }
     @Test(expected = ApiRequestException.class)
     public void actualizarEstadoGuiaNoExistente(){
         Integer numGuia = 1;
         Integer cedulaEmpleado = 123;
         String estado = "EN RUTA";
+        EnvioUpdateDTO envioUpdateDTO = new EnvioUpdateDTO(numGuia,estado,cedulaEmpleado);
         Cliente cliente = new Cliente();
         cliente.setCedula(123);
         Paquete paquete = new Paquete();
@@ -239,13 +244,14 @@ public class EnvioServiceTest {
         when(envioRepository.findById(any())).thenReturn(Optional.empty());
         when(empleadoRepository.findById(any())).thenReturn(Optional.of(empleado));
 
-        this.envioService.actualizarEstado(numGuia,cedulaEmpleado,estado);
+        this.envioService.actualizarEstado(envioUpdateDTO);
     }
     @Test(expected = ApiRequestException.class)
     public void actualizarEmpleadoNoValido(){
         Integer numGuia = 1;
         Integer cedulaEmpleado = 123;
         String estado = "EN RUTA";
+        EnvioUpdateDTO envioUpdateDTO = new EnvioUpdateDTO(numGuia,estado,cedulaEmpleado);
         Cliente cliente = new Cliente();
         cliente.setCedula(123);
         Paquete paquete = new Paquete();
@@ -278,13 +284,14 @@ public class EnvioServiceTest {
         when(envioRepository.findById(any())).thenReturn(Optional.of(envio));
         when(empleadoRepository.findById(any())).thenReturn(Optional.of(empleado));
 
-        this.envioService.actualizarEstado(numGuia,cedulaEmpleado,estado);
+        this.envioService.actualizarEstado(envioUpdateDTO);
     }
     @Test(expected = ApiRequestException.class)
     public void actualizarEmpleadoNoExistente(){
         Integer numGuia = 1;
         Integer cedulaEmpleado = 123;
         String estado = "EN RUTA";
+        EnvioUpdateDTO envioUpdateDTO = new EnvioUpdateDTO(numGuia,estado,cedulaEmpleado);
         Cliente cliente = new Cliente();
         cliente.setCedula(123);
         Paquete paquete = new Paquete();
@@ -305,12 +312,13 @@ public class EnvioServiceTest {
         when(envioRepository.findById(any())).thenReturn(Optional.of(envio));
         when(empleadoRepository.findById(any())).thenReturn(Optional.empty());
 
-        this.envioService.actualizarEstado(numGuia,cedulaEmpleado,estado);
+        this.envioService.actualizarEstado(envioUpdateDTO);
     }
     @Test
     public void filtrarEnvios(){
         String estado = "RECIBIDO";
         Integer cedulaEmpleado = 123;
+        EnvioFilterDTO envioFilterDTO = new EnvioFilterDTO(estado,cedulaEmpleado);
         Cliente cliente = new Cliente();
         cliente.setCedula(123);
         Paquete paquete = new Paquete();
@@ -335,7 +343,7 @@ public class EnvioServiceTest {
         when(empleadoRepository.findById(any())).thenReturn(Optional.of(new Empleado()));
         when(envioRepository.findAll()).thenReturn(envios);
 
-        List<EnvioDTO> enviosDTO =  this.envioService.filtrar(estado,cedulaEmpleado);
+        List<EnvioDTO> enviosDTO =  this.envioService.filtrar(envioFilterDTO);
 
         assertTrue(!enviosDTO.isEmpty());
     }
@@ -343,6 +351,7 @@ public class EnvioServiceTest {
     public void filtrarEmpleadoNoExiste(){
         String estado = "RECIBIDO";
         Integer cedulaEmpleado = 123;
+        EnvioFilterDTO envioFilterDTO = new EnvioFilterDTO(estado,cedulaEmpleado);
         Cliente cliente = new Cliente();
         cliente.setCedula(123);
         Paquete paquete = new Paquete();
@@ -367,6 +376,6 @@ public class EnvioServiceTest {
         when(empleadoRepository.findById(any())).thenReturn(Optional.empty());
         when(envioRepository.findAll()).thenReturn(envios);
 
-        this.envioService.filtrar(estado,cedulaEmpleado);
+        this.envioService.filtrar(envioFilterDTO);
     }
 }

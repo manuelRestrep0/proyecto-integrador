@@ -1,7 +1,9 @@
 package com.manuel.proyectointegrador.controller;
 
 import com.manuel.proyectointegrador.dto.EnvioDTO;
+import com.manuel.proyectointegrador.dto.EnvioFilterDTO;
 import com.manuel.proyectointegrador.dto.EnvioResponseDTO;
+import com.manuel.proyectointegrador.dto.EnvioUpdateDTO;
 import com.manuel.proyectointegrador.service.EnvioService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -59,8 +61,8 @@ public class EnvioController {
             @ApiResponse(code = 500, message = "Error inespedaro del sistema.")
     })
     @PatchMapping("/envio")
-    public EnvioResponseDTO actualizarEstadoEnvio(@RequestParam("guia") Integer numGuia, @RequestParam("estado") String estadoEnvio, @RequestParam("empleado") Integer cedulaEmpleado){
-        return this.envioService.actualizarEstado(numGuia,cedulaEmpleado,estadoEnvio);
+    public EnvioResponseDTO actualizarEstadoEnvio(@RequestBody EnvioUpdateDTO envioUpdateDTO){
+        return this.envioService.actualizarEstado(envioUpdateDTO);
     }
 
     @PreAuthorize("hasRole('READ')")
@@ -72,9 +74,9 @@ public class EnvioController {
             @ApiResponse(code = 500, message = "Error inespedaro del sistema.")
     })
     @GetMapping("/envio")
-    public List<EnvioDTO> filtrarEnvios(@RequestParam("estado") String estadoEnvio, @RequestParam("empleado") Integer cedulaEmpleado){
+    public List<EnvioDTO> filtrarEnvios(@RequestBody EnvioFilterDTO envioFilterDTO){
         //tener en cuenta las validaciones.
-        return this.envioService.filtrar(estadoEnvio,cedulaEmpleado);
+        return this.envioService.filtrar(envioFilterDTO);
     }
 
     @PreAuthorize("hasRole('READ')")

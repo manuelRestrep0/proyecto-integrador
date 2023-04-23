@@ -2,7 +2,9 @@ package com.manuel.proyectointegrador.service;
 
 import com.manuel.proyectointegrador.Mapper.EnvioMapper;
 import com.manuel.proyectointegrador.dto.EnvioDTO;
+import com.manuel.proyectointegrador.dto.EnvioFilterDTO;
 import com.manuel.proyectointegrador.dto.EnvioResponseDTO;
+import com.manuel.proyectointegrador.dto.EnvioUpdateDTO;
 import com.manuel.proyectointegrador.exception.ApiRequestException;
 import com.manuel.proyectointegrador.model.Cliente;
 import com.manuel.proyectointegrador.model.Empleado;
@@ -86,7 +88,10 @@ public class EnvioService {
         envioDTO.setPeso(envio.get().getPaquete().getPeso());
         return envioDTO;
     }
-    public EnvioResponseDTO actualizarEstado(Integer numGuia, Integer cedulaEmpleado, String estado){
+    public EnvioResponseDTO actualizarEstado(EnvioUpdateDTO envioUpdateDTO){
+        Integer numGuia = envioUpdateDTO.getNumGuia();
+        Integer cedulaEmpleado = envioUpdateDTO.getCedulaEmpleado();
+        String estado = envioUpdateDTO.getEstadoEnvio();
         Optional<Empleado> empleado = this.empleadoRepository.findById(cedulaEmpleado);
         if(!empleado.isPresent()){
             throw new ApiRequestException("El empleado con cedula "+cedulaEmpleado+" no existe en nuestra compania");
@@ -114,13 +119,17 @@ public class EnvioService {
         } else if(estadoEnvio.equals("EN RUTA")){
             if(estado.equals("ENTREGADO")){
                 envio.get().setEstadoEnvio(estado);
+                this.envioRepository.save(envio.get());
                 return new EnvioResponseDTO(numGuia,estado);
             }
             throw new ApiRequestException("No se puede cambiar de "+estadoEnvio+" a "+estado);
         }
         throw new ApiRequestException("El envio ya ha sido entregado");
     }
-    public List<EnvioDTO> filtrar(String estado, Integer cedulaEmpleado){
+    public List<EnvioDTO> filtrar(EnvioFilterDTO envioFilterDTO){
+        Integer cedulaEmpleado = envioFilterDTO.getCedulaEmpleado();
+        String estado = envioFilterDTO.getEstadoEnvio();
+
         Optional<Empleado> empleado = this.empleadoRepository.findById(cedulaEmpleado);
         if(!empleado.isPresent()){
             throw new ApiRequestException("El empleado con cedula "+cedulaEmpleado+" no existe en nuestra compania");
