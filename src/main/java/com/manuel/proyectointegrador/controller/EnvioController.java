@@ -52,9 +52,8 @@ public class EnvioController {
     }
 
     @PreAuthorize("hasRole('WRITE')")
-    @ApiOperation(value = "Actualizar estado de envio", notes = "Se recibe por la url el numero guia del envio," +
-            "el estado al que se quiere actualizar el envio y la cedula del empleado para determinar si " +
-            "tiene los permisos para realizar la operacion.")
+    @ApiOperation(value = "Actualizar estado de envio", notes = "Se recibe por el body el estado al que se " +
+            "quiere actualizar el envio, la cedula del empleado y el numero guia del envio.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "funciona correctamente."),
             @ApiResponse(code = 400, message = "Bad Request. Algo ingresaste mal."),
@@ -65,9 +64,9 @@ public class EnvioController {
         return this.envioService.actualizarEstado(envioUpdateDTO);
     }
 
-    @PreAuthorize("hasRole('READ')")
+    /*@PreAuthorize("hasRole('READ')")
     @ApiOperation(value = "Obtener lista de envios por estado de envio", notes = "Se recibe por la url el estado de envio " +
-            "que se quiere filtrar y la cedula del empleado para saber si esta registrado en la base de datos.")
+            "y la cedula del empleado para saber si esta registrado en la base de datos.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "funciona correctamente."),
             @ApiResponse(code = 400, message = "Bad Request. Algo ingresaste mal."),
@@ -78,11 +77,30 @@ public class EnvioController {
         //tener en cuenta las validaciones.
         return this.envioService.filtrar(envioFilterDTO);
     }
+     */
 
     @PreAuthorize("hasRole('READ')")
     @GetMapping("/envios")
     public List<EnvioDTO> envios(){
         return this.envioService.retornarEnvios();
+    }
+    @ApiOperation(value = "Obtener lista de envios por estado de envio", notes = "Se recibe por la url el estado de envio " +
+            "y la cedula del empleado para saber si esta registrado en la base de datos.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "funciona correctamente."),
+            @ApiResponse(code = 400, message = "Bad Request. Algo ingresaste mal."),
+            @ApiResponse(code = 500, message = "Error inespedaro del sistema.")
+    })
+    @GetMapping("/envios/{estado}/{cedula}")
+    public List<EnvioDTO> filtrarEnvios(@PathVariable("estado") String estadoEnvio, @PathVariable("cedula") Integer cedulaEmpleado){
+        EnvioFilterDTO envioFilterDTO = new EnvioFilterDTO(estadoEnvio, cedulaEmpleado);
+        return this.envioService.filtrar(envioFilterDTO);
+    }
+
+    @DeleteMapping("/envio/{numeroGuia}")
+    public String eliminarEnvio(@PathVariable("numeroGuia") int numeroGuia){
+        this.envioService.eliminarEnvioImpl(numeroGuia);
+        return "Eliminacion exitosa";
     }
 
 }

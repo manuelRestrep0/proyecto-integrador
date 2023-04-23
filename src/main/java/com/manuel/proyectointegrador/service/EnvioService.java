@@ -165,6 +165,11 @@ public class EnvioService {
         }
         return enviosDTO;
     }
+    public void eliminarEnvioImpl(Integer numGuia){
+        Optional<Envio> envio = this.envioRepository.findById(numGuia);
+        this.envioRepository.deleteById(numGuia);
+        this.paqueteRepository.deleteById(envio.get().getPaquete().getIdPaquete());
+    }
     public String asignarTipoPaquete(Integer peso){
         if(peso<2){
             return "LIVIANO";
