@@ -83,20 +83,21 @@ se encuentra en el siguiente dominio:
 ### POST http://localhost:8080/api/v1/empleado  (Registrar empleado.)
 
   El body de la solicitud recibe los siguientes parametros:
+  NOTA: El tipo de empleado solo puede ser COORDINADOR, REPARTIDOR O CONDUCTOR
     
   ```java {.highlight .highlight-source-java .bg-black}
-    {
-    "cedula": Integer,
-    "nombre": String,
-    "apellido": String,
-    "celular": String,
-    "correo": String,
-    "direccionResidencial": String,
-    "ciudad": String,
-    "antiguedad": 0,
-    "rh": "string",
-    "tipoEmpleado": "string"
-    }
+	    {
+	    "cedula": Integer,
+	    "nombre": String,
+	    "apellido": String,
+	    "celular": String,
+	    "correo": String,
+	    "direccionResidencial": String,
+	    "ciudad": String,
+	    "antiguedad": 0,
+	    "rh": "string",
+	    "tipoEmpleado": "string"
+	    }
   ```
   
   Ejemplo de la petición:
