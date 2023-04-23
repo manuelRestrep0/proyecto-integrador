@@ -74,6 +74,7 @@ public class EnvioService {
         envio.setHoraEntrega(asignarHora());
         envio.setValorEnvio(asignarPrecioEnvio(paquete.getTipoPaquete()));
         envio.setPaquete(paquete);
+        envio.setCliente(cliente.get());
         this.envioRepository.save(envio);
         return new EnvioResponseDTO(envio.getNumeroGuia(),envio.getEstadoEnvio());
     }
