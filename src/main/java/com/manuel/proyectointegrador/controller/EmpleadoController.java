@@ -40,8 +40,8 @@ public class EmpleadoController {
             @ApiResponse(code = 500, message = "Error inespedaro del sistema.")
     })
     @DeleteMapping("/empleado/{cedula}")
-    public String eliminarEmpleado(@PathVariable("cedula") int cedula){
-        this.eliminarEmpleado(cedula);
+    public String eliminar(@PathVariable("cedula") int cedula){
+        this.empleadoService.eliminarEmpleado(cedula);
         return "Empleado eliminado";
     }
     @ApiOperation(value = "Obtener empleado", notes = "Se recibe por la url la cedula del empleado y " +
