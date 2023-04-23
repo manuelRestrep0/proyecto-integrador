@@ -22,7 +22,6 @@ public class ClienteController {
         this.clienteService = clienteService;
     }
 
-    @PreAuthorize("hasRole('WRITE')")
     @ApiOperation(value = "Registrar cliente", notes = "Se recibe por el body un objeto de tipo clienteDTO y este se registra en la " +
             "base de datos.")
     @ApiResponses(value = {
@@ -34,7 +33,6 @@ public class ClienteController {
     public ClienteDTO crearCliente(@RequestBody ClienteDTO cliente){
         return this.clienteService.crearCliente(cliente);
     }
-    @PreAuthorize("hasRole('WRITE')")
     @ApiOperation(value = "Eliminar cliente", notes = "Se recibe por la url la cedula del cliente y se " +
             "elimina este de la base de datos.")
     @ApiResponses(value = {
@@ -48,7 +46,6 @@ public class ClienteController {
         return "Se elimino correctamente";
     }
 
-    @PreAuthorize("hasRole('READ')")
     @ApiOperation(value = "Obtener cliente", notes = "Se recibe por la url la cedula del cliente y " +
             "se devuelve la informacion del cliente de estar registrado.")
     @ApiResponses(value = {

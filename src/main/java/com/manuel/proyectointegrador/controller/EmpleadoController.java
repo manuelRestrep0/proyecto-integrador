@@ -20,7 +20,6 @@ public class EmpleadoController {
     @Autowired public void EmpleadoController(EmpleadoService empleadoService){
         this.empleadoService = empleadoService;
     }
-    @PreAuthorize("hasRole('WRITE')")
     @ApiOperation(value = "Registrar empleado", notes = "Se recibe por el body un objeto de tipo empleadoDTO y este se registra en la " +
             "base de datos.")
     @ApiResponses(value = {
@@ -33,7 +32,6 @@ public class EmpleadoController {
         this.empleadoService.crearEmpleado(empleado);
         return empleado;
     }
-    @PreAuthorize("hasRole('WRITE')")
     @ApiOperation(value = "Eliminar Empleado", notes = "Se recibe por la url la cedula del empleado y se " +
             "elimina este de la base de datos.")
     @ApiResponses(value = {
@@ -46,7 +44,6 @@ public class EmpleadoController {
         this.eliminarEmpleado(cedula);
         return "Empleado eliminado";
     }
-    @PreAuthorize("hasRole('READ')")
     @ApiOperation(value = "Obtener empleado", notes = "Se recibe por la url la cedula del empleado y " +
             "se devuelve la informacion del empleado de estar registrado.")
     @ApiResponses(value = {

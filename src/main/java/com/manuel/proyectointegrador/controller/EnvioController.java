@@ -25,7 +25,6 @@ public class EnvioController {
         this.envioService = envioService;
     }
 
-    @PreAuthorize("hasRole('WRITE')")
     @ApiOperation(value = "Generar envio", notes = "Se recibe por el body un un objeto de tipo envioDTO y" +
             "se registra en la base de datos si cumple todas las validaciones.")
     @ApiResponses(value = {
@@ -38,7 +37,6 @@ public class EnvioController {
         return this.envioService.crearEnvio(envio);
     }
 
-    @PreAuthorize("hasRole('READ')")
     @ApiOperation(value = "Obtener envio", notes = "Se recibe por la url el numero guia del envio y " +
             "se devuelve la informacion del envio de estar registrado.")
     @ApiResponses(value = {
@@ -50,8 +48,6 @@ public class EnvioController {
     public EnvioDTO obtenerEnvio(@PathVariable("numeroGuia") int numeroGuia){
         return this.envioService.buscarEnvio(numeroGuia);
     }
-
-    @PreAuthorize("hasRole('WRITE')")
     @ApiOperation(value = "Actualizar estado de envio", notes = "Se recibe por el body el estado al que se " +
             "quiere actualizar el envio, la cedula del empleado y el numero guia del envio.")
     @ApiResponses(value = {
@@ -64,22 +60,6 @@ public class EnvioController {
         return this.envioService.actualizarEstado(envioUpdateDTO);
     }
 
-    /*@PreAuthorize("hasRole('READ')")
-    @ApiOperation(value = "Obtener lista de envios por estado de envio", notes = "Se recibe por la url el estado de envio " +
-            "y la cedula del empleado para saber si esta registrado en la base de datos.")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "funciona correctamente."),
-            @ApiResponse(code = 400, message = "Bad Request. Algo ingresaste mal."),
-            @ApiResponse(code = 500, message = "Error inespedaro del sistema.")
-    })
-    @GetMapping("/envio")
-    public List<EnvioDTO> filtrarEnvios(@RequestBody EnvioFilterDTO envioFilterDTO){
-        //tener en cuenta las validaciones.
-        return this.envioService.filtrar(envioFilterDTO);
-    }
-     */
-
-    @PreAuthorize("hasRole('READ')")
     @GetMapping("/envios")
     public List<EnvioDTO> envios(){
         return this.envioService.retornarEnvios();
