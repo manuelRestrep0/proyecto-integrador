@@ -22,16 +22,16 @@ Ademas se hizo uso de Spring boot para utilizar diferentes librerias tales como:
 </ol>
 
 
-La integración continua se implementó con Github Actions y el despliegue del servicio se hizo por medio de Google Cloud,
+La integración continua se implementó con Github Actions y el despliegue del servicio se hizo por medio de Railway,
 se encuentra en el siguiente dominio: 
 
-### [https://springgcp-384619.rj.r.appspot.com/swagger-ui/index.html#/](https://springgcp-384619.rj.r.appspot.com/swagger-ui/index.html#/)
+### [https://proyecto-integrador-production-9aa1.up.railway.app/swagger-ui/index.html#/](https://proyecto-integrador-production-9aa1.up.railway.app/swagger-ui/index.html#/)
 
 
 
 # Endpoints:
 
-### POST https://springgcp-384619.rj.r.appspot.com/api/v1/cliente  (Registrar un cliente.)
+### POST https://proyecto-integrador-production-9aa1.up.railway.app/api/v1/cliente  (Registrar un cliente.)
   El body de la solicitud recibe los siguientes parametros: 
   ```java {.highlight .highlight-source-java .bg-black}
     {
@@ -57,14 +57,14 @@ se encuentra en el siguiente dominio:
     }
 ```
 
-### DELETE https://springgcp-384619.rj.r.appspot.com/api/v1/cliente/{cedula}  (Eliminar cliente por su cedula.)
+### DELETE https://proyecto-integrador-production-9aa1.up.railway.app/api/v1/cliente/{cedula}  (Eliminar cliente por su cedula.)
   La petición recibe el numero de cedula de un cliente y retorna un String confirmando que la operación
   ocurrió de manera satisfactoria siempre que es estado de la petición sea 200.
 ```java {.highlight .highlight-source-java .bg-black}
     Se elimino correctamente
 ```
 
-### GET https://springgcp-384619.rj.r.appspot.com/api/v1/cliente/{{cedula}}  (Obtener cliente por su cedula.)
+### GET https://proyecto-integrador-production-9aa1.up.railway.app/api/v1/cliente/{{cedula}}  (Obtener cliente por su cedula.)
   La petición recibe el numero de cedula de un cliente y retorna la información asociada a este cliente.
   
   Ejemplo de la respuesta:
@@ -80,7 +80,7 @@ se encuentra en el siguiente dominio:
     }
   ```
 
-### POST https://springgcp-384619.rj.r.appspot.com/api/v1/empleado  (Registrar empleado.)
+### POST https://proyecto-integrador-production-9aa1.up.railway.app/api/v1/empleado  (Registrar empleado.)
 
   El body de la solicitud recibe los siguientes parametros:
   NOTA: El tipo de empleado solo puede ser COORDINADOR, REPARTIDOR O CONDUCTOR
@@ -117,7 +117,7 @@ se encuentra en el siguiente dominio:
     }
 ```
 
-### DELETE https://springgcp-384619.rj.r.appspot.com/api/v1/empleado/{{cedula}}  (Eliminar empleado por su cedula.)
+### DELETE https://proyecto-integrador-production-9aa1.up.railway.app/api/v1/empleado/{{cedula}}  (Eliminar empleado por su cedula.)
   La petición recibe el numero de cedula de un empleado y retorna un String confirmando que la operación
   ocurrió de manera satisfactoria siempre que es estado de la petición sea 200.
     
@@ -125,7 +125,7 @@ se encuentra en el siguiente dominio:
       Se elimino correctamente
   ```
 
-### GET https://springgcp-384619.rj.r.appspot.com//api/v1/empleado/{{cedula}}  (Obtener empleado por su cedula.)
+### GET https://proyecto-integrador-production-9aa1.up.railway.app/api/v1/empleado/{{cedula}}  (Obtener empleado por su cedula.)
   La petición recibe el numero de cedula de un empleado y retorna la información asociada a este empleado.
     
   Ejemplo de la respuesta:
@@ -144,7 +144,7 @@ se encuentra en el siguiente dominio:
     }
 ```
 
-### POST https://springgcp-384619.rj.r.appspot.com/api/v1/envio  (Registrar envio.)
+### POST https://proyecto-integrador-production-9aa1.up.railway.app/api/v1/envio  (Registrar envio.)
 
   El body de la solicitud recibe los siguientes parametros:
     
@@ -190,7 +190,7 @@ se encuentra en el siguiente dominio:
  ``` 
 
 
-### GET https://springgcp-384619.rj.r.appspot.com/api/v1/envio/{{numeroGuia}}  (Obtener un envio por su numero guia.)
+### GET https://proyecto-integrador-production-9aa1.up.railway.app/api/v1/envio/{{numeroGuia}}  (Obtener un envio por su numero guia.)
   La peticion recibe el numero guia y devuelve toda la informacion relacionada al envio
   
   Ejemplo respuesta: 
@@ -211,7 +211,7 @@ se encuentra en el siguiente dominio:
  ``` 
 
 
-### PATCH https://springgcp-384619.rj.r.appspot.com/api/v1/envio  (Actualizar el estado de un envio.)
+### PATCH https://proyecto-integrador-production-9aa1.up.railway.app/api/v1/envio  (Actualizar el estado de un envio.)
 
   Recibe el numero guia, el estado al que se quiere actualizar el envio y la cedula del empleado 
   para hacer las validaciones y proceder con la actualización del envio.
@@ -240,7 +240,7 @@ se encuentra en el siguiente dominio:
       }
  ``` 
 
-### GET https://springgcp-384619.rj.r.appspot.com/api/v1/envios/{{estado}}/{{cedula}}  (Filtrar los envios por su estado de envio.)
+### GET https://proyecto-integrador-production-9aa1.up.railway.app/api/v1/envios/{{estado}}/{{cedula}}  (Filtrar los envios por su estado de envio.)
 
   Recibe el estado de envio en el que se quiere filtrar los envios de la base de datos y la cedula del empleado.
   
