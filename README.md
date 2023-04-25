@@ -22,7 +22,7 @@ Ademas se hizo uso de Spring boot para utilizar diferentes librerias tales como:
 </ol>
 
 
-La integración continua se implementó con Github Actions y el despliegue del servicio se hizo por medio de Railway,
+La integración continua se implementó con Github Actions y el despliegue del servicio se hizo por medio de Google Cloud,
 se encuentra en el siguiente dominio: 
 
 ### [https://springgcp-384619.rj.r.appspot.com/swagger-ui/index.html#/](https://springgcp-384619.rj.r.appspot.com/swagger-ui/index.html#/)
