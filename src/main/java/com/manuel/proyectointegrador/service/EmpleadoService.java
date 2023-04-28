@@ -53,6 +53,10 @@ public class EmpleadoService {
     }
 
     public void eliminarEmpleado(Integer cedula){
+        Optional<Empleado> empleado = this.empleadoRepository.findById(cedula);
+        if(!empleado.isPresent()){
+            throw new ApiRequestException("El empleado con cedula "+cedula+" no se encuentra registrado.");
+        }
         this.empleadoRepository.deleteById(cedula);
     }
 }

@@ -167,6 +167,9 @@ public class EnvioService {
     }
     public void eliminarEnvioImpl(Integer numGuia){
         Optional<Envio> envio = this.envioRepository.findById(numGuia);
+        if(!envio.isPresent()){
+            throw new ApiRequestException("El envio con la guia: "+numGuia+" no se encuentra registrado");
+        }
         this.envioRepository.deleteById(numGuia);
         this.paqueteRepository.deleteById(envio.get().getPaquete().getIdPaquete());
     }

@@ -51,6 +51,10 @@ public class ClienteService {
     }
 
     public void eliminarCliente(Integer cedula){
+        Optional<Cliente> cliente = this.clienteRepository.findById(cedula);
+        if(!cliente.isPresent()){
+            throw new ApiRequestException("El cliente con cedula "+cedula+" no se encuentra registrado.");
+        }
         this.clienteRepository.deleteById(cedula);
     }
 }
