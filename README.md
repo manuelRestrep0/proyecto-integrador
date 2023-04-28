@@ -1,4 +1,4 @@
-# PROYECTO INTEGRADOR MAKAIA 
+#  INTEGRADOR MAKAIA 
 
 El proyecto tiene la finalidad de demostrar que se logró aprender exitosamente todos los contenidos del bootcamp de backend de Makaia, por ello se hizo uso de todas las tecnologías aprendidas a lo largo del curso.
 
