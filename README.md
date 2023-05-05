@@ -311,6 +311,9 @@ para explorar la documentación de este puede ingresar al siguiente enlace:
 
 # Flujo de los envios
 
+![Diagrama sin título drawio](https://user-images.githubusercontent.com/94997816/236493185-b4f3e5cd-15d4-4634-a5f4-8dc64e770752.png)
+
 ![flujo-proyecto (1)](https://user-images.githubusercontent.com/94997816/235497498-fba599ab-4e84-45ec-8cc6-cc96acdff555.png)
+
 
 
